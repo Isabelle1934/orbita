@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* ORBITA design tokens — deep space black, dark navy, violet + electric blue accents. */
+@theme {
+  --color-void: #04060d;
+  --color-space-950: #060914;
+  --color-space-900: #0a0f22;
+  --color-space-850: #0d1430;
+  --color-space-800: #111a3b;
+  --color-space-700: #1a2550;
+  --color-line: #1d2852;
+  --color-line-soft: #151e40;
+  --color-ink: #eef1ff;
+  --color-ink-soft: #b7bfe3;
+  --color-ink-mute: #7c87b8;
+  --color-ink-faint: #525d8c;
+  --color-violet: #7c5cff;
+  --color-violet-soft: #a28bff;
+  --color-electric: #3b82f6;
+  --color-cyan: #38bdf8;
+  --color-ok: #34d399;
+  --color-warn: #fbbf24;
+  --color-crit: #f43f5e;
+  --color-nasa: #60a5fa;
+  --color-sim: #c084fc;
+  --color-user: #2dd4bf;
+
+  --font-sans: "Inter", "Segoe UI Variable", "Segoe UI", ui-sans-serif, system-ui, -apple-system, Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Code", ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-void);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "tnum" 1, "cv11" 1;
+}
+
+/* Subtle star-field + nebula backdrop for the app shell (static, no animation). */
+.orbita-backdrop {
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(124, 92, 255, 0.12), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(56, 189, 248, 0.08), transparent 60%),
+    var(--color-void);
+}
+
+.panel {
+  background: linear-gradient(180deg, rgba(17, 26, 59, 0.72), rgba(10, 15, 34, 0.82));
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+}
+
+.panel-flat {
+  background: rgba(13, 20, 48, 0.6);
+  border: 1px solid var(--color-line-soft);
+  border-radius: 10px;
+}
+
+.label-caps {
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-mute);
+  font-weight: 600;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.focus-ring:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+}
+
+.field {
+  width: 100%;
+  background: var(--color-space-950);
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: var(--color-ink);
+  font-size: 14px;
+}
+.field:disabled {
+  opacity: 0.5;
+}
+.field[aria-invalid="true"] {
+  border-color: var(--color-crit);
+}
+
+.pulse-dot {
+  animation: orbita-pulse 2s ease-in-out infinite;
+}
+@keyframes orbita-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.scrollbar-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: var(--color-space-700); border-radius: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.recharts-cartesian-grid line { stroke: var(--color-line-soft); }
+.recharts-text { fill: var(--color-ink-mute); font-size: 11px; }
